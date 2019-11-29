@@ -1,6 +1,7 @@
-from pyDatalog.pyDatalog import create_terms, ask, load, assert_fact
+from pyDatalog.pyDatalog import create_terms, ask, load, assert_fact, clear
 
 if __name__ == "__main__":
+    clear()
     create_terms('X, frog, canary, green, yellow, chirps, sings, croakes, eatFlies')
 
     load("""
@@ -13,5 +14,6 @@ if __name__ == "__main__":
     assert_fact('croakes', 'fritz')
     assert_fact('eatFlies', 'fritz')
 
-    print(ask('frog(X)').answers)
+    print("frog: ", ask('frog(X)').answers)
+    print("green: ", ask('green(X)').answers)
 
