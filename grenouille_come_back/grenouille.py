@@ -1,18 +1,17 @@
-from pyDatalog import pyDatalog
-
-
+from pyDatalog.pyDatalog import create_terms, ask, load, assert_fact
 
 if __name__ == "__main__":
-    pyDatalog.create_terms('X, frog, canary, green, yellow, chirps, sings')
+    create_terms('X, frog, canary, green, yellow, chirps, sings, croakes, eatFlies')
 
-    pyDatalog.load("""
-        + frog('fritz', 'croakes')
-        + frog('fritz', 'eatFlies')
+    load("""
         frog(X) <= croakes(X) & eatFlies(X)
         canary(X) <= chirps(X) & sings(X)
-        frog(X) <= green(X)
-        canary(X) <= yellow(X)
+        green(X) <= frog(X)
+        yellow(X) <= canary(X)
     """)
 
-    print(pyDatalog.ask('frog(fritz, X)'))
+    assert_fact('croakes', 'fritz')
+    assert_fact('eatFlies', 'fritz')
+
+    print(ask('frog(X)').answers)
 
